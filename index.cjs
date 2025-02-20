@@ -289,10 +289,6 @@ class MyPromise{
         return this
     }
 
-    catch(){
-
-    }
-
     finally(){
 
     }
@@ -321,6 +317,10 @@ MyPromise.prototype.then = function(onFulfilled, onRejected){
     let C = SpeciesConstructor(this, MyPromise)
     let promiseCapability = NewPromiseCapability(C)
     return PerformPromiseThen(promise, onFulfilled, onRejected, promiseCapability)
+}
+
+MyPromise.prototype.catch = function(onRejected){
+    return this.then(undefined, onRejected)
 }
 
 Object.defineProperty(MyPromise, Symbol.species, {
